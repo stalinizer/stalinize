@@ -12,7 +12,7 @@ find_library(LIBCGI NAMES cgi HINTS  "${BASE}libcgi-master/src/")
 message("LIBCGI ${LIBCGI}")
 include_directories( "${BASE}libcgi-master/src/")
 
-set_source_files_properties(face.c PROPERTIES LANGUAGE CXX)
+set_source_files_properties(stalinize.c PROPERTIES LANGUAGE CXX)
 add_executable(stalinize.cgi stalinize.c )
 target_link_libraries(stalinize.cgi ${LIBCGI})
 target_link_libraries(stalinize.cgi ${LIBOPENCV})
