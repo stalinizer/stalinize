@@ -14,5 +14,8 @@ include_directories( "${BASE}libcgi-master/src/")
 
 set_source_files_properties(stalinize.c PROPERTIES LANGUAGE CXX)
 add_executable(stalinize.cgi stalinize.c )
+
+add_library(cgi multipart.cpp)
+
 target_link_libraries(stalinize.cgi ${LIBCGI})
 target_link_libraries(stalinize.cgi ${LIBOPENCV})
