@@ -31,14 +31,14 @@
 #include <cfloat>
 
 /*
-#include <new>
-#include <algorithm>
-#include <functional>
-#include <iterator>
+  #include <new>
+  #include <algorithm>
+  #include <functional>
+  #include <iterator>
 
 
-#include "cgicc/CgiUtils.h"
-#include "cgicc/Cgicc.h"
+  #include "cgicc/CgiUtils.h"
+  #include "cgicc/Cgicc.h"
 */
 
 // case-insensitive string comparison
@@ -46,7 +46,7 @@
 // "The C++ Programming Language, Third Edition" by Bjarne Stroustrup
 bool 
 stringsAreEqual(const std::string& s1, 
-		       const std::string& s2)
+                const std::string& s2)
 {
   std::string::const_iterator p1 = s1.begin();
   std::string::const_iterator p2 = s2.begin();
@@ -64,8 +64,8 @@ stringsAreEqual(const std::string& s1,
 // case-insensitive string comparison
 bool 
 stringsAreEqual(const std::string& s1, 
-		       const std::string& s2,
-		       size_t n)
+                const std::string& s2,
+                size_t n)
 {
   std::string::const_iterator p1 = s1.begin();
   std::string::const_iterator p2 = s2.begin();
@@ -98,7 +98,7 @@ charToHex(char c)
 
 char
 hexToChar(char first,
-		 char second)
+          char second)
 {
   int digit;
   
@@ -145,8 +145,8 @@ form_urldecode(const std::string& src)
 // locate data between separators, and return it
 std::string
 extractBetween(const std::string& data, 
-		      const std::string& separator1, 
-		      const std::string& separator2)
+               const std::string& separator1, 
+               const std::string& separator2)
 {
   std::string result;
   std::string::size_type start, limit;
@@ -607,7 +607,7 @@ namespace cgicc {
   {
   public:
 
-    CgiEnvironment(CgiInput *input)
+    CgiEnvironment()
     {
       readEnvironmentVariables(input);
 
@@ -639,38 +639,38 @@ namespace cgicc {
 
     bool 
     operator== (const CgiEnvironment& env) 		const
-{
-  bool result;
+    {
+      bool result;
   
-  result =  fServerPort 	== env.fServerPort;
-  result &= fContentLength 	== env.fContentLength;
-  result &= fUsingHTTPS 	== env.fUsingHTTPS;
-  result &= fServerSoftware 	== env.fServerSoftware;
-  result &= fServerName 	== env.fServerName;
-  result &= fGatewayInterface 	== env.fGatewayInterface;
-  result &= fServerProtocol 	== env.fServerProtocol;
-  result &= fRequestMethod 	== env.fRequestMethod;
-  result &= fPathInfo 		== env.fPathInfo;
-  result &= fPathTranslated 	== env.fPathTranslated;
-  result &= fScriptName 	== env.fScriptName;
-  result &= fQueryString 	== env.fQueryString;
-  result &= fRemoteHost 	== env.fRemoteHost;
-  result &= fRemoteAddr 	== env.fRemoteAddr;
-  result &= fAuthType 		== env.fAuthType;
-  result &= fRemoteUser 	== env.fRemoteUser;
-  result &= fRemoteIdent 	== env.fRemoteIdent;
-  result &= fContentType 	== env.fContentType;
-  result &= fAccept 		== env.fAccept;
-  result &= fUserAgent 		== env.fUserAgent;
-  result &= fPostData 		== env.fPostData;
-  result &= fRedirectRequest 	== env.fRedirectRequest;
-  result &= fRedirectURL 	== env.fRedirectURL;
-  result &= fRedirectStatus 	== env.fRedirectStatus;
-  result &= fReferrer 		== env.fReferrer;
-  result &= fCookie 		== env.fCookie;
+      result =  fServerPort 	== env.fServerPort;
+      result &= fContentLength 	== env.fContentLength;
+      result &= fUsingHTTPS 	== env.fUsingHTTPS;
+      result &= fServerSoftware 	== env.fServerSoftware;
+      result &= fServerName 	== env.fServerName;
+      result &= fGatewayInterface 	== env.fGatewayInterface;
+      result &= fServerProtocol 	== env.fServerProtocol;
+      result &= fRequestMethod 	== env.fRequestMethod;
+      result &= fPathInfo 		== env.fPathInfo;
+      result &= fPathTranslated 	== env.fPathTranslated;
+      result &= fScriptName 	== env.fScriptName;
+      result &= fQueryString 	== env.fQueryString;
+      result &= fRemoteHost 	== env.fRemoteHost;
+      result &= fRemoteAddr 	== env.fRemoteAddr;
+      result &= fAuthType 		== env.fAuthType;
+      result &= fRemoteUser 	== env.fRemoteUser;
+      result &= fRemoteIdent 	== env.fRemoteIdent;
+      result &= fContentType 	== env.fContentType;
+      result &= fAccept 		== env.fAccept;
+      result &= fUserAgent 		== env.fUserAgent;
+      result &= fPostData 		== env.fPostData;
+      result &= fRedirectRequest 	== env.fRedirectRequest;
+      result &= fRedirectURL 	== env.fRedirectURL;
+      result &= fRedirectStatus 	== env.fRedirectStatus;
+      result &= fReferrer 		== env.fReferrer;
+      result &= fCookie 		== env.fCookie;
 
-  return result;
-}
+      return result;
+    }
 
     
     inline bool
@@ -688,40 +688,40 @@ namespace cgicc {
      */
     CgiEnvironment& 
     operator= (const CgiEnvironment& env)
-{
-  fServerPort 		= env.fServerPort;
-  fContentLength 	= env.fContentLength;
-  fUsingHTTPS 		= env.fUsingHTTPS;
-  fServerSoftware 	= env.fServerSoftware;
-  fServerName 		= env.fServerName;
-  fGatewayInterface 	= env.fGatewayInterface;
-  fServerProtocol 	= env.fServerProtocol;
-  fRequestMethod 	= env.fRequestMethod;
-  fPathInfo 		= env.fPathInfo;
-  fPathTranslated 	= env.fPathTranslated;
-  fScriptName 		= env.fScriptName;
-  fQueryString 		= env.fQueryString;
-  fRemoteHost 		= env.fRemoteHost;
-  fRemoteAddr 		= env.fRemoteAddr;
-  fAuthType 		= env.fAuthType;
-  fRemoteUser 		= env.fRemoteUser;
-  fRemoteIdent 		= env.fRemoteIdent;
-  fContentType 		= env.fContentType;
-  fAccept 		= env.fAccept;
-  fUserAgent 		= env.fUserAgent;
-  fPostData 		= env.fPostData;
-  fRedirectRequest 	= env.fRedirectRequest;
-  fRedirectURL 		= env.fRedirectURL;
-  fRedirectStatus 	= env.fRedirectStatus;
-  fReferrer 		= env.fReferrer;
-  fCookie 		= env.fCookie;
+    {
+      fServerPort 		= env.fServerPort;
+      fContentLength 	= env.fContentLength;
+      fUsingHTTPS 		= env.fUsingHTTPS;
+      fServerSoftware 	= env.fServerSoftware;
+      fServerName 		= env.fServerName;
+      fGatewayInterface 	= env.fGatewayInterface;
+      fServerProtocol 	= env.fServerProtocol;
+      fRequestMethod 	= env.fRequestMethod;
+      fPathInfo 		= env.fPathInfo;
+      fPathTranslated 	= env.fPathTranslated;
+      fScriptName 		= env.fScriptName;
+      fQueryString 		= env.fQueryString;
+      fRemoteHost 		= env.fRemoteHost;
+      fRemoteAddr 		= env.fRemoteAddr;
+      fAuthType 		= env.fAuthType;
+      fRemoteUser 		= env.fRemoteUser;
+      fRemoteIdent 		= env.fRemoteIdent;
+      fContentType 		= env.fContentType;
+      fAccept 		= env.fAccept;
+      fUserAgent 		= env.fUserAgent;
+      fPostData 		= env.fPostData;
+      fRedirectRequest 	= env.fRedirectRequest;
+      fRedirectURL 		= env.fRedirectURL;
+      fRedirectStatus 	= env.fRedirectStatus;
+      fReferrer 		= env.fReferrer;
+      fCookie 		= env.fCookie;
 
-  //fCookies.clear();
-  //  fCookies.reserve(env.fCookies.size());
-  parseCookies();
+      //fCookies.clear();
+      //  fCookies.reserve(env.fCookies.size());
+      parseCookies();
 
-  return *this;
-}
+      return *this;
+    }
 
 
     inline std::string 
@@ -1065,7 +1065,7 @@ namespace cgicc {
     
     // Read in all the environment variables
     void 
-    readEnvironmentVariables(CgiInput *input);
+    readEnvironmentVariables();
     
     unsigned long 		fServerPort;
     unsigned long 		fContentLength;
@@ -1098,59 +1098,59 @@ namespace cgicc {
   };
   
 
-class MultipartHeader 
-{
-public:
-
-  MultipartHeader(const std::string& disposition,
-					const std::string& name,
-					const std::string& filename,
-					const std::string& cType)
-  : fContentDisposition(disposition),
-    fName(name),
-    fFilename(filename),
-    fContentType(cType)
-  {}
-
-  
-  inline
-  MultipartHeader(const MultipartHeader& head)
-  { operator=(head); }
-
-  ~MultipartHeader(){}
-
-  MultipartHeader&
-  operator= (const MultipartHeader& head)
+  class MultipartHeader 
   {
-    fContentDisposition 	= head.fContentDisposition;
-    fName 		= head.fName;
-    fFilename 		= head.fFilename;
-    fContentType 		= head.fContentType;    
-    return *this;
-  }
+  public:
+
+    MultipartHeader(const std::string& disposition,
+                    const std::string& name,
+                    const std::string& filename,
+                    const std::string& cType)
+      : fContentDisposition(disposition),
+        fName(name),
+        fFilename(filename),
+        fContentType(cType)
+    {}
+
   
-  inline std::string 
-  getContentDisposition() 				const
-  { return fContentDisposition; }
+    inline
+    MultipartHeader(const MultipartHeader& head)
+    { operator=(head); }
+
+    ~MultipartHeader(){}
+
+    MultipartHeader&
+    operator= (const MultipartHeader& head)
+    {
+      fContentDisposition 	= head.fContentDisposition;
+      fName 		= head.fName;
+      fFilename 		= head.fFilename;
+      fContentType 		= head.fContentType;    
+      return *this;
+    }
   
-  inline std::string
-  getName() 						const
-  { return fName; }
+    inline std::string 
+    getContentDisposition() 				const
+    { return fContentDisposition; }
+  
+    inline std::string
+    getName() 						const
+    { return fName; }
 
-  inline std::string 
-  getFilename() 					const
-  { return fFilename; }
+    inline std::string 
+    getFilename() 					const
+    { return fFilename; }
 
-  inline std::string 
-  getContentType() 					const
-  { return fContentType; }
+    inline std::string 
+    getContentType() 					const
+    { return fContentType; }
 
-private:
-  std::string fContentDisposition;
-  std::string fName;
-  std::string fFilename;
-  std::string fContentType;
-};
+  private:
+    std::string fContentDisposition;
+    std::string fName;
+    std::string fFilename;
+    std::string fContentType;
+  };
 
 
 
@@ -1206,17 +1206,12 @@ private:
     //    bool 
     //    findEntries(const std::string& param, 
     //		bool byName,
-                //		std::vector<FormEntry>& result) 	const;
+    //		std::vector<FormEntry>& result) 	const;
 
-    Cgicc(CgiInput *input)
-      : fEnvironment(input)
+    Cgicc()
     { 
-      // this can be tweaked for performance
-      //fFormData.reserve(20);
-      //fFormFiles.reserve(2);
-      
-      parseFormInput(fEnvironment.getPostData(), fEnvironment.getContentType());
-      parseFormInput(fEnvironment.getQueryString());
+      // call then parseFormInput(data, fEnvironment.getContentType());
+
     }
     
     ~Cgicc()
@@ -1230,214 +1225,214 @@ private:
       //fFormData.clear();
       //fFormFiles.clear();
 
-  parseFormInput(fEnvironment.getPostData(), fEnvironment.getContentType());
-  parseFormInput(fEnvironment.getQueryString());
+      parseFormInput(fEnvironment.getPostData(), fEnvironment.getContentType());
+      parseFormInput(fEnvironment.getQueryString());
   
-  return *this;
-}
+      return *this;
+    }
 
-const char* getCompileDate() const { return __DATE__; }
+    const char* getCompileDate() const { return __DATE__; }
 
-const char*
-getCompileTime() 					const
-{ return __TIME__; }
+    const char*
+    getCompileTime() 					const
+    { return __TIME__; }
 
-const char*
-getVersion() 					const
-{ return "unstable test version"; }
+    const char*
+    getVersion() 					const
+    { return "unstable test version"; }
 
-const char*
-getHost() 					const
-{ return "dev server"; }
+    const char*
+    getHost() 					const
+    { return "dev server"; }
 
-void
-save(const std::string& filename) 		const
-{
-  fEnvironment.save(filename);
-}
+    void
+    save(const std::string& filename) 		const
+    {
+      fEnvironment.save(filename);
+    }
 
-void restore(const std::string& filename) {
-  fEnvironment.restore(filename);
+    void restore(const std::string& filename) {
+      fEnvironment.restore(filename);
 
-  // clear the current data and re-parse the enviroment
-  //  fFormData.clear();
-  //  fFormFiles.clear();
+      // clear the current data and re-parse the enviroment
+      //  fFormData.clear();
+      //  fFormFiles.clear();
 
-  parseFormInput(fEnvironment.getPostData(), fEnvironment.getContentType());
-  parseFormInput(fEnvironment.getQueryString());
-}
+      parseFormInput(fEnvironment.getPostData(), fEnvironment.getContentType());
+      parseFormInput(fEnvironment.getQueryString());
+    }
 
 
     //void         parseFormInput(const std::string& data, const std::string& content_type = );
-void
-parseFormInput(const std::string& data, 
-               const std::string &content_type = "application/x-www-form-urlencoded")
-{
+    void
+    parseFormInput(const std::string& data, 
+                   const std::string &content_type = "application/x-www-form-urlencoded")
+    {
   
-  std::string standard_type	= "application/x-www-form-urlencoded";
-  std::string multipart_type 	= "multipart/form-data";
+      std::string standard_type	= "application/x-www-form-urlencoded";
+      std::string multipart_type 	= "multipart/form-data";
 
-  // Don't waste time on empty input
-  if(true == data.empty())
-    return;
+      // Don't waste time on empty input
+      if(true == data.empty())
+        return;
 
-  // Standard content type = application/x-www-form-urlencoded
-  // It may not be explicitly specified
-  if(true == content_type.empty() 
-     || stringsAreEqual(content_type, standard_type,standard_type.length())) {
-    std::string name, value;
-    std::string::size_type pos;
-    std::string::size_type oldPos = 0;
+      // Standard content type = application/x-www-form-urlencoded
+      // It may not be explicitly specified
+      if(true == content_type.empty() 
+         || stringsAreEqual(content_type, standard_type,standard_type.length())) {
+        std::string name, value;
+        std::string::size_type pos;
+        std::string::size_type oldPos = 0;
 
-    // Parse the data in one fell swoop for efficiency
-    while(true) {
-      // Find the '=' separating the name from its value, also have to check for '&' as its a common misplaced delimiter but is a delimiter none the less
-      pos = data.find_first_of( "&=", oldPos);
+        // Parse the data in one fell swoop for efficiency
+        while(true) {
+          // Find the '=' separating the name from its value, also have to check for '&' as its a common misplaced delimiter but is a delimiter none the less
+          pos = data.find_first_of( "&=", oldPos);
       
-      // If no '=', we're finished
-      if(std::string::npos == pos)
-	break;
+          // If no '=', we're finished
+          if(std::string::npos == pos)
+            break;
       
-      // Decode the name
-	// pos == '&', that means whatever is in name is the only name/value
-      if( data.at( pos ) == '&' )
-	  {
-	  	const char * pszData = data.c_str() + oldPos;
-		while( *pszData == '&' ) // eat up extraneous '&'
+          // Decode the name
+          // pos == '&', that means whatever is in name is the only name/value
+          if( data.at( pos ) == '&' )
+            {
+              const char * pszData = data.c_str() + oldPos;
+              while( *pszData == '&' ) // eat up extraneous '&'
 		{
-			++pszData; ++oldPos;
+                  ++pszData; ++oldPos;
 		}
-		if( oldPos >= pos )
+              if( oldPos >= pos )
 		{ // its all &'s
-			oldPos = ++pos;
-			continue;
+                  oldPos = ++pos;
+                  continue;
 		}
-		// this becomes an name with an empty value
-		name = form_urldecode(data.substr(oldPos, pos - oldPos));
-		Process(FormEntry(name, "" ) );
-		oldPos = ++pos;
-		continue;
-	  }
-      name = form_urldecode(data.substr(oldPos, pos - oldPos));
-      oldPos = ++pos;
+              // this becomes an name with an empty value
+              name = form_urldecode(data.substr(oldPos, pos - oldPos));
+              Process(FormEntry(name, "" ) );
+              oldPos = ++pos;
+              continue;
+            }
+          name = form_urldecode(data.substr(oldPos, pos - oldPos));
+          oldPos = ++pos;
       
-      // Find the '&' or ';' separating subsequent name/value pairs
-      pos = data.find_first_of(";&", oldPos);
+          // Find the '&' or ';' separating subsequent name/value pairs
+          pos = data.find_first_of(";&", oldPos);
       
-      // Even if an '&' wasn't found the rest of the string is a value
-      value = form_urldecode(data.substr(oldPos, pos - oldPos));
+          // Even if an '&' wasn't found the rest of the string is a value
+          value = form_urldecode(data.substr(oldPos, pos - oldPos));
 
-      // Store the pair
-      Process(FormEntry(name, value));
+          // Store the pair
+          Process(FormEntry(name, value));
       
-      if(std::string::npos == pos)
-	break;
+          if(std::string::npos == pos)
+            break;
 
-      // Update parse position
-      oldPos = ++pos;
+          // Update parse position
+          oldPos = ++pos;
+        }
+      }
+      // File upload type = multipart/form-data
+      else if(stringsAreEqual(multipart_type, content_type,
+                              multipart_type.length())){
+
+        // Find out what the separator is
+        std::string 		bType 	= "boundary=";
+        std::string::size_type 	pos 	= content_type.find(bType);
+
+        // Remove next sentence
+        std::string                 commatek=";";
+
+        // generate the separators
+        std::string sep1 = content_type.substr(pos + bType.length());
+        if (sep1.find(";")!=std::string::npos)
+          sep1=sep1.substr(0,sep1.find(";"));
+        sep1.append("\r\n");
+        sep1.insert(0, "--");
+
+        std::string sep2 = content_type.substr(pos + bType.length());
+        if (sep2.find(";")!=std::string::npos)
+          sep2=sep2.substr(0,sep2.find(";"));
+        sep2.append("--\r\n");
+        sep2.insert(0, "--");
+
+        // Find the data between the separators
+        std::string::size_type start  = data.find(sep1);
+        std::string::size_type sepLen = sep1.length();
+        std::string::size_type oldPos = start + sepLen;
+
+        while(true) {
+          pos = data.find(sep1, oldPos);
+
+          // If sep1 wasn't found, the rest of the data is an item
+          if(std::string::npos == pos)
+            break;
+
+          // parse the data
+          parseMIME(data.substr(oldPos, pos - oldPos));
+
+          // update position
+          oldPos = pos + sepLen;
+        }
+
+        // The data is terminated by sep2
+        pos = data.find(sep2, oldPos);
+        // parse the data, if found
+        if(std::string::npos != pos) {
+          parseMIME(data.substr(oldPos, pos - oldPos));
+        }
+      }
     }
-  }
-  // File upload type = multipart/form-data
-  else if(stringsAreEqual(multipart_type, content_type,
-			  multipart_type.length())){
 
-    // Find out what the separator is
-    std::string 		bType 	= "boundary=";
-    std::string::size_type 	pos 	= content_type.find(bType);
+    cgicc::MultipartHeader
+    parseHeader(const std::string& data)
+    {
+      std::string disposition;
+      disposition = extractBetween(data, "Content-Disposition: ", ";");
+  
+      std::string name;
+      name = extractBetween(data, "name=\"", "\"");
+  
+      std::string filename;
+      filename = extractBetween(data, "filename=\"", "\"");
 
-    // Remove next sentence
-    std::string                 commatek=";";
+      std::string cType;
+      cType = extractBetween(data, "Content-Type: ", "\r\n\r\n");
 
-    // generate the separators
-    std::string sep1 = content_type.substr(pos + bType.length());
-    if (sep1.find(";")!=std::string::npos)
-       sep1=sep1.substr(0,sep1.find(";"));
-    sep1.append("\r\n");
-    sep1.insert(0, "--");
+      // This is hairy: Netscape and IE don't encode the filenames
+      // The RFC says they should be encoded, so I will assume they are.
+      filename = form_urldecode(filename);
 
-    std::string sep2 = content_type.substr(pos + bType.length());
-    if (sep2.find(";")!=std::string::npos)
-       sep2=sep2.substr(0,sep2.find(";"));
-    sep2.append("--\r\n");
-    sep2.insert(0, "--");
-
-    // Find the data between the separators
-    std::string::size_type start  = data.find(sep1);
-    std::string::size_type sepLen = sep1.length();
-    std::string::size_type oldPos = start + sepLen;
-
-    while(true) {
-      pos = data.find(sep1, oldPos);
-
-      // If sep1 wasn't found, the rest of the data is an item
-      if(std::string::npos == pos)
-	break;
-
-      // parse the data
-      parseMIME(data.substr(oldPos, pos - oldPos));
-
-      // update position
-      oldPos = pos + sepLen;
+      return MultipartHeader(disposition, name, filename, cType);
     }
 
-    // The data is terminated by sep2
-    pos = data.find(sep2, oldPos);
-    // parse the data, if found
-    if(std::string::npos != pos) {
-      parseMIME(data.substr(oldPos, pos - oldPos));
+    void parseMIME(const std::string& data)
+    {
+      // Find the header
+      std::string end = "\r\n\r\n";
+      std::string::size_type headLimit = data.find(end, 0);
+  
+      // Detect error
+      if(std::string::npos == headLimit)
+        throw std::runtime_error("Malformed input");
+
+      // Extract the value - there is still a trailing CR/LF to be subtracted off
+      std::string::size_type valueStart = headLimit + end.length();
+      std::string value = data.substr(valueStart, data.length() - valueStart - 2);
+
+      // Parse the header - pass trailing CR/LF x 2 to parseHeader
+      MultipartHeader head = parseHeader(data.substr(0, valueStart));
+
+      if(head.getFilename().empty())
+        Process(FormEntry(head.getName(), value));
+      else
+        Process(
+                FormFile(
+                         head.getName(), 
+                         head.getFilename(), 
+                         head.getContentType(), 
+                         value));
     }
-  }
-}
-
-cgicc::MultipartHeader
-parseHeader(const std::string& data)
-{
-  std::string disposition;
-  disposition = extractBetween(data, "Content-Disposition: ", ";");
-  
-  std::string name;
-  name = extractBetween(data, "name=\"", "\"");
-  
-  std::string filename;
-  filename = extractBetween(data, "filename=\"", "\"");
-
-  std::string cType;
-  cType = extractBetween(data, "Content-Type: ", "\r\n\r\n");
-
-  // This is hairy: Netscape and IE don't encode the filenames
-  // The RFC says they should be encoded, so I will assume they are.
-  filename = form_urldecode(filename);
-
-  return MultipartHeader(disposition, name, filename, cType);
-}
-
-void parseMIME(const std::string& data)
-{
-  // Find the header
-  std::string end = "\r\n\r\n";
-  std::string::size_type headLimit = data.find(end, 0);
-  
-  // Detect error
-  if(std::string::npos == headLimit)
-    throw std::runtime_error("Malformed input");
-
-  // Extract the value - there is still a trailing CR/LF to be subtracted off
-  std::string::size_type valueStart = headLimit + end.length();
-  std::string value = data.substr(valueStart, data.length() - valueStart - 2);
-
-  // Parse the header - pass trailing CR/LF x 2 to parseHeader
-  MultipartHeader head = parseHeader(data.substr(0, valueStart));
-
-  if(head.getFilename().empty())
-    Process(FormEntry(head.getName(), value));
-  else
-    Process(
-            FormFile(
-                     head.getName(), 
-                     head.getFilename(), 
-                     head.getContentType(), 
-                     value));
-}
   };
 
 }

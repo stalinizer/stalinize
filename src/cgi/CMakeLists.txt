@@ -5,17 +5,38 @@ set (CVBASE   "${BASE}opencv-master/cgi/")
 message("CVBASE ${CVBASE}")
 
 find_library(LIBOPENCV NAMES opencv-face HINTS "${CVBASE}" )
+find_package( ZLIB REQUIRED )
+find_package (Threads)
+FIND_LIBRARY(LIBDL_LIBRARIES NAMES dl libdl )
+find_package(PNG REQUIRED)
+find_package(JPEG REQUIRED)
 
 message("OPENCV ${LIBOPENCV}")
 
 find_library(LIBCGI NAMES cgi HINTS  "${BASE}libcgi-master/src/")
 message("LIBCGI ${LIBCGI}")
 include_directories( "${BASE}libcgi-master/src/")
+include_directories( "${BASE}opencv-master/include/")
+include_directories( "${BASE}opencv-master/modules/core/include/")
+include_directories( "${BASE}opencv-master/modules/objdetect/include/")
+include_directories( "${BASE}opencv-master/modules/imgproc/include/")
+include_directories( "${BASE}opencv-master/modules/highgui/include/")
+include_directories(${PTHREAD_INCLUDE_DIR})
 
-set_source_files_properties(stalinize.c PROPERTIES LANGUAGE CXX)
-add_executable(stalinize.cgi stalinize.c )
 
-add_library(cgi multipart.cpp)
+set_source_files_properties(compose.c PROPERTIES LANGUAGE CXX)
+add_executable(composetest compose.c )
 
-target_link_libraries(stalinize.cgi ${LIBCGI})
-target_link_libraries(stalinize.cgi ${LIBOPENCV})
+#####################
+
+target_link_libraries(composetest ${LIBCGI})
+target_link_libraries(composetest ${LIBOPENCV})
+target_link_libraries(composetest ${OPENCV_LINKER_LIBS} ${OPENCV_C_SAMPLES_REQUIRED_DEPS})
+target_link_libraries(composetest ${ZLIB_LIBRARIES} )
+target_link_libraries(composetest ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(composetest ${PTHREAD_LIBRARY})
+target_link_libraries(composetest ${PNG_LIBRARY})
+target_link_libraries(composetest ${JPEG_LIBRARY})
+#target_link_libraries(composetest opencv-face)
+
+
