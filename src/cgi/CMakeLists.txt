@@ -24,6 +24,23 @@ include_directories( "${BASE}opencv-master/modules/highgui/include/")
 include_directories(${PTHREAD_INCLUDE_DIR})
 
 
+set_source_files_properties(stalinize.c PROPERTIES LANGUAGE CXX)
+add_executable(stalinize.cgi stalinize.c )
+
+#####################
+
+target_link_libraries(stalinize.cgi ${LIBCGI})
+target_link_libraries(stalinize.cgi ${LIBOPENCV})
+target_link_libraries(stalinize.cgi ${OPENCV_LINKER_LIBS} ${OPENCV_C_SAMPLES_REQUIRED_DEPS})
+target_link_libraries(stalinize.cgi ${ZLIB_LIBRARIES} )
+target_link_libraries(stalinize.cgi ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(stalinize.cgi ${PTHREAD_LIBRARY})
+target_link_libraries(stalinize.cgi ${PNG_LIBRARY})
+target_link_libraries(stalinize.cgi ${JPEG_LIBRARY})
+#target_link_libraries(stalinize.cgi opencv-face)
+
+
+######
 set_source_files_properties(compose.c PROPERTIES LANGUAGE CXX)
 add_executable(composetest compose.c )
 
