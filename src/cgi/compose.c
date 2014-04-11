@@ -13,6 +13,28 @@
 #include "opencv/cxcore.h"
 #include <opencv2/imgproc/types_c.h>
 
+void print_mat(const char * name, cv::Mat & m){
+  return;
+  cv::_InputArray psrc1(m);
+  cv::imwrite( name, m);
+
+  int kind = psrc1.kind();
+  int type = psrc1.type();
+  int depth = CV_MAT_DEPTH(type);
+  int cn = CV_MAT_CN(type);
+  int dims1 = psrc1.dims();
+  cv::Size sz = psrc1.size();
+
+  std::cout <<  "name:" << name;
+  std::cout <<  " Kind:" << kind;
+  std::cout <<  " Type:" << type;
+  std::cout <<  " depth:" << depth;
+  std::cout <<  " cn:" << cn;
+  std::cout <<  " dims:" << dims1;
+  std::cout <<  " Size: width:" << sz.width 
+            <<  " heigh:t" << sz.height
+            << std::endl;
+}
 
 int main (int argc, char ** argv) {
   if (argc < 4) {
@@ -41,44 +63,29 @@ int main (int argc, char ** argv) {
 
   cv::Mat mask_image( source.size(), source.type());
   stalin_mask.copyTo(mask_image(roi));
-  cv::imwrite( "mask.jpg",  mask_image);
+  print_mat( "mask.jpg",  mask_image);
 
   cv::Mat masked_image( source.size(), source.type());
+  cv::Mat masked_image2( source.size(), source.type());
+  cv::bitwise_not(masked_image,masked_image2);
+
   stalin.copyTo(masked_image(roi));
-  cv::imwrite( "masked.jpg",  masked_image);
+  print_mat( "masked.jpg",  masked_image);
 
-  ////////////////////////////////////////////////////
-  //masked_image.copyTo(source, mask_image);
-  std::vector<cv::Mat> maskChannels(3);
+  stalin.copyTo(masked_image2(roi));
+  print_mat( "masked2.jpg",  masked_image2);
 
-  cv::split(masked_image, maskChannels);
-  cv::imwrite( "chan1.jpg", maskChannels[0] );
-  cv::imwrite( "chan2.jpg", maskChannels[1] );
-  cv::imwrite( "chan3.jpg", maskChannels[2] );
+  cv::Mat result_mask1;
+  cv::bitwise_and(masked_image,mask_image,result_mask1);
+  print_mat( "merged1.jpg", result_mask1);
 
-  std::vector<cv::Mat> result_mask(3);
-  cv::bitwise_and(maskChannels[0],mask_image,result_mask[0]);
-  cv::bitwise_and(maskChannels[1],mask_image,result_mask[1]);
-  cv::bitwise_and(maskChannels[2],mask_image,result_mask[2]);
-  cv::Mat m;
-  cv::merge(result_mask,m );
-  cv::imwrite( "masked_merged.jpg", m);
- 
-  cv::Mat mask2 = 255 - mask2;
-  std::vector<cv::Mat> srcChannels(3);
-  cv::split(source, srcChannels);
-  cv::imwrite( "schan1.jpg", srcChannels[0] );
-  cv::imwrite( "schan2.jpg", srcChannels[1] );
-  cv::imwrite( "schan3.jpg", srcChannels[2] );
+  cv::Mat result_mask2;
+  cv::add(source,mask_image,result_mask2);
+  print_mat( "merged2.jpg", result_mask2);
 
-  cv::bitwise_and(srcChannels[0],mask2,result_mask[0]);
-  cv::bitwise_and(srcChannels[1],mask2,result_mask[1]);
-  cv::bitwise_and(srcChannels[2],mask2,result_mask[2]);
-
-  cv::Mat m1;
-  cv::merge(result_mask,m1 );      
-  cv::addWeighted(m,1,m1,1,0,m1); 
-  cv::imwrite( "merged.jpg", m1 );
-
+  cv::Mat result_mask3;
+  cv::bitwise_and(masked_image2,result_mask2,result_mask3);
+  print_mat( "merged4a.jpg", result_mask3);
+  cv::imwrite( "output.jpg", result_mask3);
 
 }
