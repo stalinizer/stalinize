@@ -20,11 +20,14 @@
 class Stalinizer  { 
 
  public:
+  int count;
 
   void print_mat(const char * name, cv::Mat & m){
-    
+    char buffer[120];
+    sprintf(buffer, "/tmp/test_%d_%s", count, name);
+
     cv::_InputArray psrc1(m);
-    cv::imwrite( name, m);
+    cv::imwrite( buffer, m);
     
     int kind = psrc1.kind();
     int type = psrc1.type();
@@ -55,26 +58,29 @@ class Stalinizer  {
 
     // resize the mask onto the box where the face was found
     cv::resize(stalin_mask, stalin_mask_local, box);
-    //print_mat( "mask.jpg",  stalin_mask_local);
+    print_mat( "mask.jpg",  stalin_mask_local);
 
     // create a full sized (b/w) mask that is the same size as the source, it will be black to start with
     cv::Mat mask_image( source.size(), source.type());
-
+    mask_image  = cv::Scalar(0, 0, 0);
+    print_mat( "mask_image_start.jpg",  mask_image);
     // the mask image is black to begin with
 
     // copy the resized stalin mask onto the right location of the full size image
     // this creates a white whole in the right space where you want to put the stalin
     stalin_mask_local.copyTo(mask_image(roi));
-    //print_mat( "mask_image.jpg",  mask_image);
+    print_mat( "mask_image.jpg",  mask_image);
 
-    // create a masked image, again bacl
+    // create a masked image, same size
     cv::Mat masked_image( source.size(), source.type());
+    // start with black
+    masked_image  = cv::Scalar(0, 0, 0);
 
     cv::Mat masked_image2; // going to be a white box the size of the input inpage
 
     // white it out
     cv::bitwise_not(masked_image, masked_image2);
-    //print_mat( "masked_image2.jpg",  masked_image2);
+    print_mat( "masked_image2.jpg",  masked_image2);
 
     // now copy stalin onto a white backgroup
     stalin_local.copyTo(masked_image2(roi));
@@ -89,8 +95,12 @@ class Stalinizer  {
     cv::Mat result_mask3;
 
     // and the stalin on white with the source with face removed
-    cv::bitwise_and(masked_image2,result_mask2, source);
-    print_mat( "result_mask3.jpg", source);
+    cv::bitwise_and(masked_image2,result_mask2, result_mask3);
+    print_mat( "result_mask3.jpg", result_mask3);
+    
+    // source
+    result_mask3.copyTo(source);
+    print_mat( "source.jpg", source);
 
   }
 
@@ -154,30 +164,36 @@ class Stalinizer  {
     double alpha = 0.5; double beta; double input;
     beta = ( 1.0 - alpha );
 
-    for( std::vector<cv::Rect>::const_iterator r = faces.begin(); r != faces.end(); r++, i++ ){
-        printf("Got a face\n");
-        cv::Point center;        
-        int radius;
-        double aspect_ratio = (double)r->width/r->height;
+    count = 0;
 
-        center.x = cvRound((r->x + r->width*0.5)*scale);
-        center.y = cvRound((r->y + r->height*0.5)*scale);
-        radius = cvRound((r->width + r->height)*0.40*scale);
-        printf("Face x=%d y=%d radius=%d\n",
-               center.x ,
-               center.y,
-               radius);
-        cv::Rect roi(
-                     center.x - radius,
-                     center.y - radius,
-                     radius * 2,
-                     radius * 2
-                     );
-        
-        replace_face(img, roi);
+    for( std::vector<cv::Rect>::const_iterator r = faces.begin(); r != faces.end(); r++, i++ ){
+      count = count + 1;
+      printf("Got a face\n");
+      cv::Point center;        
+      int radius;
+      double aspect_ratio = (double)r->width/r->height;
+      
+      center.x = cvRound((r->x + r->width*0.5)*scale);
+      center.y = cvRound((r->y + r->height*0.5)*scale);
+      radius = cvRound((r->width + r->height)*0.40*scale);
+      printf("Face x=%d y=%d radius=%d\n",
+             center.x ,
+             center.y,
+             radius);
+      cv::Rect roi(
+                   center.x - radius,
+                   center.y - radius,
+                   radius * 2,
+                   radius * 2
+                   );
+      
+      print_mat("before.jpg", img);
+      replace_face(img, roi);
+      print_mat("after.jpg", img);
+      
     }
     
-    cv::imwrite( "/tmp/output.jpg", img );
+    //cv::imwrite( "/tmp/output.jpg", img );
 
   }
 
