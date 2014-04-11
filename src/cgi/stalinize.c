@@ -20,17 +20,77 @@
 class Stalinizer  { 
 
  public:
+
+  void print_mat(const char * name, cv::Mat & m){
+    
+    cv::_InputArray psrc1(m);
+    cv::imwrite( name, m);
+    
+    int kind = psrc1.kind();
+    int type = psrc1.type();
+    int depth = CV_MAT_DEPTH(type);
+    int cn = CV_MAT_CN(type);
+    int dims1 = psrc1.dims();
+    cv::Size sz = psrc1.size();
+
+    std::cout <<  "name:" << name;
+    std::cout <<  " Kind:" << kind;
+    std::cout <<  " Type:" << type;
+    std::cout <<  " depth:" << depth;
+    std::cout <<  " cn:" << cn;
+    std::cout <<  " dims:" << dims1;
+    std::cout <<  " Size: width:" << sz.width 
+              <<  " heigh:t" << sz.height
+              << std::endl;
+  }
   
   void replace_face(cv::Mat & source, cv::Rect & roi) {
     cv::Size box(roi.width,roi.height);
 
     cv::Mat stalin_local;
+    // resize the stalin into a box
     cv::resize(stalin, stalin_local, box);
 
     cv::Mat stalin_mask_local;
-    cv::resize(stalin_mask, stalin_mask_local, box);
 
-    stalin.copyTo(source(roi), stalin_mask);
+    // resize the mask onto the box where the face was found
+    cv::resize(stalin_mask, stalin_mask_local, box);
+    //print_mat( "mask.jpg",  stalin_mask_local);
+
+    // create a full sized (b/w) mask that is the same size as the source, it will be black to start with
+    cv::Mat mask_image( source.size(), source.type());
+
+    // the mask image is black to begin with
+
+    // copy the resized stalin mask onto the right location of the full size image
+    // this creates a white whole in the right space where you want to put the stalin
+    stalin_mask_local.copyTo(mask_image(roi));
+    //print_mat( "mask_image.jpg",  mask_image);
+
+    // create a masked image, again bacl
+    cv::Mat masked_image( source.size(), source.type());
+
+    cv::Mat masked_image2; // going to be a white box the size of the input inpage
+
+    // white it out
+    cv::bitwise_not(masked_image, masked_image2);
+    //print_mat( "masked_image2.jpg",  masked_image2);
+
+    // now copy stalin onto a white backgroup
+    stalin_local.copyTo(masked_image2(roi));
+    print_mat( "masked_image2a.jpg",  masked_image2);
+
+    cv::Mat result_mask2;
+
+    // add the source with the mask to cut out the face
+    cv::add(source, mask_image, result_mask2);
+    print_mat( "result_mask2.jpg", result_mask2);
+
+    cv::Mat result_mask3;
+
+    // and the stalin on white with the source with face removed
+    cv::bitwise_and(masked_image2,result_mask2, source);
+    print_mat( "result_mask3.jpg", source);
 
   }
 
@@ -93,12 +153,9 @@ class Stalinizer  {
 
     double alpha = 0.5; double beta; double input;
     beta = ( 1.0 - alpha );
-    cv::Mat dst;
 
-    for( std::vector<cv::Rect>::const_iterator r = faces.begin(); r != faces.end(); r++, i++ )
-      {
+    for( std::vector<cv::Rect>::const_iterator r = faces.begin(); r != faces.end(); r++, i++ ){
         printf("Got a face\n");
-
         cv::Point center;        
         int radius;
         double aspect_ratio = (double)r->width/r->height;
@@ -116,20 +173,27 @@ class Stalinizer  {
                      radius * 2,
                      radius * 2
                      );
-
+        
         replace_face(img, roi);
-       }
-
-    cv::imwrite( "/tmp/output.jpg", dst );
+    }
+    
+    cv::imwrite( "/tmp/output.jpg", img );
 
   }
 
   void main()
   {
-    stalin = cv::imread( "Stalin61.jpg", -1 );
-    stalin_mask = cv::imread( "Stalin6_mask.jpg", -1 );
+
 
     printf("Content-Type: text/html\n\n");    
+
+    printf("reading Stalin61.jpg\n");    
+    stalin = cv::imread( "Stalin61.jpg", -1 );
+
+    printf("reading Stalin6_mask.jpg\n");    
+    stalin_mask = cv::imread( "Stalin6_mask.jpg", -1 );
+
+
     cgi_include("stalinize.html");
     
     if(getenv("CONTENT_LENGTH")!=NULL){
