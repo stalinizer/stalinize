@@ -1,0 +1,42 @@
+cmake_minimum_required(VERSION 2.8)
+set (BASE  "../../../")
+set (CVBASE   "${BASE}opencv-master/cgi/")
+
+message("CVBASE ${CVBASE}")
+
+find_library(LIBOPENCV NAMES opencv-face HINTS "${CVBASE}" )
+find_package( ZLIB REQUIRED )
+find_package (Threads)
+FIND_LIBRARY(LIBDL_LIBRARIES NAMES dl libdl )
+find_package(PNG REQUIRED)
+find_package(JPEG REQUIRED)
+
+message("OPENCV ${LIBOPENCV}")
+
+find_library(LIBCGI NAMES cgi HINTS  "${BASE}libcgi-master/src/")
+message("LIBCGI ${LIBCGI}")
+include_directories( "${BASE}libcgi-master/src/")
+include_directories( "${BASE}opencv-master/include/")
+include_directories( "${BASE}opencv-master/modules/core/include/")
+include_directories( "${BASE}opencv-master/modules/objdetect/include/")
+include_directories( "${BASE}opencv-master/modules/imgproc/include/")
+include_directories( "${BASE}opencv-master/modules/highgui/include/")
+include_directories(${PTHREAD_INCLUDE_DIR})
+
+
+set_source_files_properties(compose.c PROPERTIES LANGUAGE CXX)
+add_executable(stalinize.cgi compose.c )
+
+#####################
+
+target_link_libraries(stalinize.cgi ${LIBCGI})
+target_link_libraries(stalinize.cgi ${LIBOPENCV})
+target_link_libraries(stalinize.cgi ${OPENCV_LINKER_LIBS} ${OPENCV_C_SAMPLES_REQUIRED_DEPS})
+target_link_libraries(stalinize.cgi ${ZLIB_LIBRARIES} )
+target_link_libraries(stalinize.cgi ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(stalinize.cgi ${PTHREAD_LIBRARY})
+target_link_libraries(stalinize.cgi ${PNG_LIBRARY})
+target_link_libraries(stalinize.cgi ${JPEG_LIBRARY})
+#target_link_libraries(stalinize.cgi opencv-face)
+
+
