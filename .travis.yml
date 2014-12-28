@@ -1,1 +1,9 @@
-script: "./build.sh"
+language: cpp
+compiler:
+- clang
+- gcc
+#before_install:
+#- sudo apt-get install -q -y 
+script:
+- dpkg-buildpackage -b -uc -us
+

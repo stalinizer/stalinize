@@ -1,0 +1,5 @@
+PACKAGE (VERSION) UNRELEASED; urgency=low
+
+  * Initial release. (Closes: #XXXXXX)
+
+ -- root <root@mdupont-Aspire-7750G> Sun, 28 Dec 2014 20:06:07 +0000

@@ -1,0 +1,12 @@
+Source: stalinizer
+Maintainer: James Michael DuPont <m@stalinizer.com>
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9)
+
+Package: stalinizer
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: anonymizer
+ stalinzer replaces your face
