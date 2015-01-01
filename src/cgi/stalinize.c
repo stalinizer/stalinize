@@ -1,7 +1,5 @@
 //#include <stdio.h>
 #include <time.h>
-#include <cgi.h>
-
 #include <string>
 #include <cstring>
 #include <cstdlib>
@@ -14,7 +12,6 @@
 
 #include <iostream>
 #include <fstream>
-//#include "multipart.h"
 #include <vector>
 
 class Stalinizer  { 
@@ -197,10 +194,27 @@ class Stalinizer  {
 
   }
 
+  void include_start(){
+    printf("<html><head></head><body>");
+  }
+
+  void include_stalinize(){
+    include_start();
+    printf("<h1>test</h1>");
+  }
+
+  void include_stalinize_results(){
+    include_start();
+    printf("<h1>results</h1>");
+  }
+
+  void include_stalinize_end(){
+    printf("</body></html>");
+
+  }
+  
   void main()
   {
-
-
     printf("Content-Type: text/html\n\n");    
 
     printf("reading Stalin61.jpg\n");    
@@ -209,10 +223,11 @@ class Stalinizer  {
     printf("reading Stalin6_mask.jpg\n");    
     stalin_mask = cv::imread( "Stalin6_mask.jpg", -1 );
 
+    printf("Content-type: text/html\r\n\r\n");
 
-    cgi_include("stalinize.html");
     
     if(getenv("CONTENT_LENGTH")!=NULL){
+      include_stalinize();
       int _CONTENT_LENGTH = atoi( getenv("CONTENT_LENGTH"));
 
       printf("<p>Got an attachement\n");    
@@ -223,9 +238,9 @@ class Stalinizer  {
                                )
                    );
     } else { 
-      cgi_include("stalinize_results.html"); 
+      include_stalinize_results(); 
     }	
-    cgi_include("stalinize_end.html");
+    include_stalinize_end();
     
   }
 

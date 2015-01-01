@@ -1,5 +1,5 @@
 #include <time.h>
-#include <cgi.h>
+#include <cgic.h>
 #include <string>
 #include <cstring>
 #include <cstdlib>
