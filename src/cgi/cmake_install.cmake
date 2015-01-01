@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/data/home/mdupont/experiments/stalinizer/web/stalinize/src/cgi
+# Install script for directory: /root/build/stalinizer/src/cgi
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/mnt/data/home/mdupont/experiments/stalinizer/web/stalinize/src/cgi/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/root/build/stalinizer/src/cgi/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/mnt/data/home/mdupont/experiments/stalinizer/web/stalinize/src/cgi/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/root/build/stalinizer/src/cgi/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)
