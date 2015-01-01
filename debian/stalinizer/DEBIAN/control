@@ -1,0 +1,9 @@
+Package: stalinizer
+Version: 0.1
+Architecture: amd64
+Maintainer: James Michael DuPont <m@stalinizer.com>
+Installed-Size: 25
+Section: misc
+Priority: optional
+Description: anonymizer
+ stalinzer replaces your face
