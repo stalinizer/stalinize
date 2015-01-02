@@ -111,6 +111,19 @@ composetest/fast:
 	$(MAKE) -f src/cgi/CMakeFiles/composetest.dir/build.make src/cgi/CMakeFiles/composetest.dir/build
 .PHONY : composetest/fast
 
+#=============================================================================
+# Target rules for targets named stalinize.cgi
+
+# Build rule for target.
+stalinize.cgi: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 stalinize.cgi
+.PHONY : stalinize.cgi
+
+# fast build rule for target.
+stalinize.cgi/fast:
+	$(MAKE) -f src/cgi/CMakeFiles/stalinize.cgi.dir/build.make src/cgi/CMakeFiles/stalinize.cgi.dir/build
+.PHONY : stalinize.cgi/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -120,6 +133,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... composetest"
+	@echo "... stalinize.cgi"
 .PHONY : help
 
 
