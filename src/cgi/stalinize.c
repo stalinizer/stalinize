@@ -156,7 +156,7 @@ class Stalinizer  {
         }
     }
 
-    printf("faces found %d\n", faces.size());
+    printf("faces found %lu\n", faces.size());
 
     double alpha = 0.5; double beta; double input;
     beta = ( 1.0 - alpha );
