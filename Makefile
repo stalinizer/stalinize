@@ -108,7 +108,7 @@ composetest: cmake_check_build_system
 
 # fast build rule for target.
 composetest/fast:
-	$(MAKE) -f src/cgi/CMakeFiles/composetest.dir/build.make src/cgi/CMakeFiles/composetest.dir/build
+	$(MAKE) -f CMakeFiles/composetest.dir/build.make CMakeFiles/composetest.dir/build
 .PHONY : composetest/fast
 
 #=============================================================================
@@ -121,8 +121,56 @@ stalinize.cgi: cmake_check_build_system
 
 # fast build rule for target.
 stalinize.cgi/fast:
-	$(MAKE) -f src/cgi/CMakeFiles/stalinize.cgi.dir/build.make src/cgi/CMakeFiles/stalinize.cgi.dir/build
+	$(MAKE) -f CMakeFiles/stalinize.cgi.dir/build.make CMakeFiles/stalinize.cgi.dir/build
 .PHONY : stalinize.cgi/fast
+
+src/cgi/compose.o: src/cgi/compose.c.o
+.PHONY : src/cgi/compose.o
+
+# target to build an object file
+src/cgi/compose.c.o:
+	$(MAKE) -f CMakeFiles/composetest.dir/build.make CMakeFiles/composetest.dir/src/cgi/compose.c.o
+.PHONY : src/cgi/compose.c.o
+
+src/cgi/compose.i: src/cgi/compose.c.i
+.PHONY : src/cgi/compose.i
+
+# target to preprocess a source file
+src/cgi/compose.c.i:
+	$(MAKE) -f CMakeFiles/composetest.dir/build.make CMakeFiles/composetest.dir/src/cgi/compose.c.i
+.PHONY : src/cgi/compose.c.i
+
+src/cgi/compose.s: src/cgi/compose.c.s
+.PHONY : src/cgi/compose.s
+
+# target to generate assembly for a file
+src/cgi/compose.c.s:
+	$(MAKE) -f CMakeFiles/composetest.dir/build.make CMakeFiles/composetest.dir/src/cgi/compose.c.s
+.PHONY : src/cgi/compose.c.s
+
+src/cgi/stalinize.o: src/cgi/stalinize.c.o
+.PHONY : src/cgi/stalinize.o
+
+# target to build an object file
+src/cgi/stalinize.c.o:
+	$(MAKE) -f CMakeFiles/stalinize.cgi.dir/build.make CMakeFiles/stalinize.cgi.dir/src/cgi/stalinize.c.o
+.PHONY : src/cgi/stalinize.c.o
+
+src/cgi/stalinize.i: src/cgi/stalinize.c.i
+.PHONY : src/cgi/stalinize.i
+
+# target to preprocess a source file
+src/cgi/stalinize.c.i:
+	$(MAKE) -f CMakeFiles/stalinize.cgi.dir/build.make CMakeFiles/stalinize.cgi.dir/src/cgi/stalinize.c.i
+.PHONY : src/cgi/stalinize.c.i
+
+src/cgi/stalinize.s: src/cgi/stalinize.c.s
+.PHONY : src/cgi/stalinize.s
+
+# target to generate assembly for a file
+src/cgi/stalinize.c.s:
+	$(MAKE) -f CMakeFiles/stalinize.cgi.dir/build.make CMakeFiles/stalinize.cgi.dir/src/cgi/stalinize.c.s
+.PHONY : src/cgi/stalinize.c.s
 
 # Help Target
 help:
@@ -130,10 +178,16 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... composetest"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... composetest"
 	@echo "... stalinize.cgi"
+	@echo "... src/cgi/compose.o"
+	@echo "... src/cgi/compose.i"
+	@echo "... src/cgi/compose.s"
+	@echo "... src/cgi/stalinize.o"
+	@echo "... src/cgi/stalinize.i"
+	@echo "... src/cgi/stalinize.s"
 .PHONY : help
 
 
