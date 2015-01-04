@@ -6,7 +6,7 @@ before_install:
 # pre build binary for the opencv version that built from git@github.com:stalinizer/opencv.git
 - wget https://www.dropbox.com/s/2stbngq02r84wfp/libcv-dev_2.5_amd64.deb
 - sudo dpkg -i libcv-dev_2.5_amd64.deb
+- sudo apt-get install -y cdbs
 - pushd .. && tar -czf  stalinizer_0.1.orig.tar.gz  stalinize && popd
 script:
 - dpkg-buildpackage -b -uc -us
-

@@ -3,7 +3,7 @@ Maintainer: James Michael DuPont <m@stalinizer.com>
 Section: misc
 Priority: optional
 Standards-Version: 3.9.2
-Build-Depends: debhelper (>= 9), libcv-dev
+Build-Depends: debhelper (>= 9), libcv-dev, cdbs
 
 Package: stalinizer
 Architecture: any

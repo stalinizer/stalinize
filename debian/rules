@@ -1,21 +1,24 @@
 #!/usr/bin/make -f
-%:
-	dh $@
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/cmake.mk #Cmake stuff
 
-CC = gcc
-CFLAGS = -g -Wall
-INSTALL_PROGRAM = install
+# %:
+# 	dh $@
 
-build:
-	$(checkdir)
-	cmake -DCMAKE_INSTALL_PREFIX=/usr .
-	$(MAKE) CC="$(CC)" CFLAGS="$(CFLAGS)"
-	touch build
+# CC = gcc
+# CFLAGS = -g -Wall
+# INSTALL_PROGRAM = install
 
-clean:
-	$(checkdir)
-	rm -f build
-	cmake -DCMAKE_INSTALL_PREFIX=/usr .
-	[ ! -f Makefile ] || $(MAKE) clean
-	rm -r *.cmake Makefile CMakeFiles CMakeCache.txt
-	rm -rf *~ debian/tmp debian/*~ debian/files* debian/substvars
+# build:
+# 	$(checkdir)
+# 	cmake -DCMAKE_INSTALL_PREFIX=/usr .
+# 	$(MAKE) CC="$(CC)" CFLAGS="$(CFLAGS)"
+# 	touch build
+
+# clean:
+# 	$(checkdir)
+# 	rm -f build
+# 	cmake -DCMAKE_INSTALL_PREFIX=/usr .
+# 	[ ! -f Makefile ] || $(MAKE) clean
+# 	rm -r *.cmake Makefile CMakeFiles CMakeCache.txt
+# 	rm -rf *~ debian/tmp debian/*~ debian/files* debian/substvars
