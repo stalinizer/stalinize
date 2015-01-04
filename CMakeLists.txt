@@ -52,6 +52,4 @@ target_link_libraries(composetest ${PNG_LIBRARY})
 target_link_libraries(composetest ${JPEG_LIBRARY})
 
 
-
-
-
+install (TARGETS composetest stalinize.cgi DESTINATION bin)
